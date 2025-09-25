@@ -16,6 +16,52 @@
     </div>
 
     <div class="col-md-9">
+        <form method="GET" action="{{ route('home') }}" class="mb-4">
+            <div class="row">
+            <div class="col-md-3">
+                <input type="text" name="search" class="form-control"
+                    placeholder="Search products..."
+                    value="{{ request('search') }}">
+            </div>
+
+            <div class="col-md-2">
+                <select name="category" class="form-control">
+                    <option value="">All Categories</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            {{ request('category') == $category->id ? 'selected' : '' }}>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <input type="number" name="min_price" class="form-control"
+                    placeholder="Min Price"
+                    value="{{ request('min_price') }}">
+            </div>
+            <div class="col-md-2">
+                <input type="number" name="max_price" class="form-control"
+                    placeholder="Max Price"
+                    value="{{ request('max_price') }}">
+            </div>
+
+            <div class="col-md-2">
+                <select name="sort" class="form-control">
+                    <option value="">Sort by</option>
+                    <option value="popularity" {{ request('sort')=='popularity' ? 'selected' : '' }}>
+                        Popularity
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-1">
+                <button type="submit" class="btn btn-primary w-100">Filter</button>
+            </div>
+            </div>
+        </form>
+
         <h1 class="mb-4">All Herbs</h1>
 
         <div class="row">
