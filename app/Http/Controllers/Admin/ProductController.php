@@ -52,6 +52,8 @@ class ProductController extends Controller
             'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+        $validated['featured'] = $request->has('featured');
+        
         $validated['slug'] = Str::slug($validated['name']);
 
         if ($request->hasFile('image')) {
@@ -93,6 +95,8 @@ class ProductController extends Controller
             'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
+        $validated['featured'] = $request->has('featured');
+        
         $validated['slug'] = Str::slug($validated['name']);
 
         if ($request->hasFile('image')) {

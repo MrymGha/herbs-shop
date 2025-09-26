@@ -42,6 +42,11 @@
             <textarea name="description" class="form-control"></textarea>
         </div>
 
+        <div class="form-check">
+            <input type="checkbox" name="featured" id="featured" class="form-check-input" {{ old('featured', $product->featured ?? false) ? 'checked' : '' }}>
+            <label for="featured" class="form-check-label">Featured Product</label>
+        </div>
+
         <button type="submit" class="btn btn-success">💾 Save</button>
         <a href="{{ route('admin.products.index') }}" class="btn btn-secondary">⬅️ Back</a>
     </form>

@@ -35,8 +35,9 @@ class ProductController extends Controller
 
         $products = $query->paginate(12);
         $categories = Category::all();
+        $featuredProducts = Product::where('featured', 1)->take(6)->get();
 
-        return view('products.index', compact('products', 'categories'));
+        return view('products.index', compact('products', 'categories', 'featuredProducts'));
 
     }
     

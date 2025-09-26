@@ -11,7 +11,7 @@ class Product extends Model
 
 
     protected $fillable = [
-    'category_id', 'name', 'slug', 'description', 'price', 'stock', 'image', 'benefits', 'preparation', 'is_active'
+    'category_id', 'name', 'slug', 'description', 'price', 'stock', 'featured', 'image', 'benefits', 'preparation', 'is_active'
     ];
 
     public function hasStock($quantity = 1)

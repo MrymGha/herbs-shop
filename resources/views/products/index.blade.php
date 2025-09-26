@@ -61,6 +61,28 @@
             </div>
             </div>
         </form>
+        <div class="container mt-5">
+            <h2 class="mb-4">Featured Products</h2>
+            <div class="row">
+            @forelse($featuredProducts as $product)
+                <div class="col-md-3 mb-4">
+                    <div class="card h-100">
+                        @if($product->image)
+                            <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top" alt="{{ $product->name }}">
+                        @endif
+                        <div class="card-body text-center">
+                            <h5 class="card-title">{{ $product->name }}</h5>
+                            <p class="card-text">${{ number_format($product->price, 2) }}</p>
+                            <a href="{{ route('products.show', $product->slug) }}" class="btn btn-primary btn-sm">View</a>
+                        </div>
+                    </div>
+                </div>
+            @empty
+                <p>No featured products yet.</p>
+            @endforelse
+            </div>
+        </div>
+
 
         <h1 class="mb-4">All Herbs</h1>
 

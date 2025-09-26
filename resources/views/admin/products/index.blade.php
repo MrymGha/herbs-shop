@@ -49,6 +49,7 @@
                     <th>Price</th>
                     <th>Stock</th>
                     <th>Description</th>
+                    <th>Featured</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -77,6 +78,13 @@
                         <td>${{ number_format($product->price, 2) }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>{{ Str::limit($product->description, 50) }}</td>
+                        <td>
+                            @if($product->featured)
+                                <span class="badge bg-success">Yes</span>
+                            @else
+                                <span class="badge bg-secondary">No</span>
+                            @endif
+                        </td>
                         <td>
                             <a href="{{ route('admin.products.edit', $product) }}" class="btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure?');">
