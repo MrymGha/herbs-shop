@@ -99,7 +99,8 @@
 
                             @auth
                                 @role('customer')
-                                    <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-auto">
+                                    {{-- <form action="{{ route('cart.add', $product->id) }}" method="POST" class="mt-auto"> --}}
+                                    <form class="add-to-cart-form" data-id="{{ $product->id }}">
                                         @csrf
                                         <input type="number" name="quantity" value="1" min="1" class="form-control mb-2">
                                         <button type="submit" class="btn btn-success w-100">Add to Cart</button>

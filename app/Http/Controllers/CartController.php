@@ -23,7 +23,7 @@ class CartController extends Controller
         $quantity = $request->input('quantity', 1);
 
         if (!$product->hasStock($quantity)) {
-            return redirect()->back()->with('error', 'Not enough stock available for this product.');
+            return redirect()->back()->with('error', 'Product is out of stock.');
         }
         
         $cart = session()->get('cart', []);
@@ -41,7 +41,16 @@ class CartController extends Controller
 
         session()->put('cart', $cart);
 
-        return redirect()->route('cart.index')->with('success', 'Produit ajouté au panier !');
+        return  response()->json([
+            'success' => true,
+            'cart_count' => array_sum(array_column($cart, 'quantity'))
+        ]);
+    }
+
+    public function count()
+    {
+        $cart = session()->get('cart', []);
+        return response()->json(['count' => array_sum(array_column($cart, 'quantity'))]);
     }
 
     public function remove($id)

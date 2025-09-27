@@ -25,8 +25,11 @@
                     @auth
                         @role('customer')
                         <li class="nav-item">
-                            <a href="{{ route('cart.index') }}" class="nav-link">
+                            {{-- <a href="{{ route('cart.index') }}" class="nav-link">
                                 Cart ({{ count(session('cart', [])) }})
+                            </a> --}}
+                            <a href="{{ route('cart.index') }}" class="nav-link">
+                                Cart (<span id="cart-count">{{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}</span>)
                             </a>
                         </li>
                         <li class="nav-item"><a href="{{ route('orders.index') }}" class="nav-link">My Orders</a></li>
@@ -60,5 +63,33 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    document.querySelectorAll('.add-to-cart-form').forEach(form => {
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        let productId = this.dataset.id;
+        let quantity = this.querySelector('input[name="quantity"]').value;
+
+        fetch(`/cart/add/${productId}`, {
+            method: "POST",
+            headers: {
+                "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ quantity: quantity })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById("cart-count").innerText = data.cart_count;
+            } else {
+                alert(data.error);
+            }
+        });
+    });
+});
+
+</script>
+
 </body>
 </html>
