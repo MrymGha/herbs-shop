@@ -71,6 +71,7 @@
             <label class="form-label">Payment Method</label>
             <select name="payment_method" class="form-select" required>
                 <option value="cod">Cash on Delivery</option>
+                <option value="cod">Dummy (for test)</option>
                 <option value="paypal">PayPal (coming soon)</option>
                 <option value="stripe">Stripe (coming soon)</option>
             </select>
